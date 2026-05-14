@@ -1,0 +1,19 @@
+# AI and Computer Vision
+ultralytics
+torch
+torchvision
+opencv-python
+
+# Geospatial and Math
+geopandas
+scipy
+pandas
+numpy
+shapely
+
+# Frontend and API
+streamlit
+requests
+
+# Metadata Extraction
+# Note: This requires the 'exiftool' binary installed on the OS

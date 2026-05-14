@@ -1,0 +1,9 @@
+# Large Data & Outputs
+data/
+output/
+__pycache__/
+.venv/
+*.mp4
+*.avi
+# OS generated files
+.DS_Store

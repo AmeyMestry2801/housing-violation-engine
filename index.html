@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Property Image Tagger</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="panel controls">
+        <div>
+          <p class="eyebrow">Audit Demo</p>
+          <h1>Property Image Tagger</h1>
+          <p class="muted">
+            Upload an image, choose a parcel, select a violation, and draw
+            bounding boxes directly on the image using the current client
+            criteria list.
+          </p>
+        </div>
+
+        <label class="field">
+          <span>Parcel Name</span>
+          <input
+            id="parcelName"
+            type="text"
+            placeholder="13 Donaldson, Buffalo, NY 14208"
+          />
+        </label>
+
+        <label class="field">
+          <span>User Role</span>
+          <select id="roleSelect">
+            <option value="watcher">Watcher</option>
+            <option value="inspector">Inspector</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span>Violation To Assign</span>
+          <select id="labelSelect"></select>
+          <small class="field-help">
+            Draw a box first, then assign the violation to that selected area.
+          </small>
+        </label>
+
+        <div id="pendingBoxPanel" class="pending-panel hidden">
+          <p class="tip-title">Pending Region</p>
+          <p class="muted" id="pendingBoxText">
+            Draw a box on the image to assign a violation.
+          </p>
+          <div class="button-row pending-actions">
+            <button id="savePendingTag">Save Tag</button>
+            <button id="discardPendingTag" class="secondary">Discard Region</button>
+          </div>
+        </div>
+
+        <div id="editBoxPanel" class="pending-panel hidden">
+          <p class="tip-title">Edit Saved Tag</p>
+          <p class="muted" id="editBoxText">
+            Select a saved annotation to update its violation label.
+          </p>
+          <div class="button-row pending-actions">
+            <button id="saveEditedTag">Update Label</button>
+            <button id="cancelEditTag" class="secondary">Cancel Edit</button>
+          </div>
+        </div>
+
+        <label class="field upload">
+          <span>Upload Real Image</span>
+          <input id="imageUpload" type="file" accept=".jpg,.jpeg,.png,image/jpeg,image/png" />
+          <small class="field-help">
+            Selecting a JPG or PNG loads the real image immediately.
+          </small>
+        </label>
+
+        <div class="button-row">
+          <button id="clearAnnotations" class="secondary">Clear All</button>
+          <button id="loadDemoImage">Use Demo Image</button>
+        </div>
+
+        <div class="tip-box">
+          <p class="tip-title">How it works</p>
+          <p class="muted">
+            Click and drag on the image to create a region. Then assign a
+            violation to that region and save it. You can repeat this for
+            multiple violations in the same image.
+          </p>
+          <p class="muted" style="margin-top: 10px">
+            While zoomed in, use <strong>Pan Mode</strong> or hold
+            <strong>Space</strong> and drag to move around the image.
+          </p>
+          <p class="muted" style="margin-top: 10px">
+            Current demo supports <strong>JPG/PNG</strong> uploads. HEIC support
+            would be added later through image conversion.
+          </p>
+          <p class="muted" style="margin-top: 10px">
+            For <strong>Bad Roof</strong>, focus on holes, tarps, and visible
+            discoloration.
+          </p>
+        </div>
+      </aside>
+
+      <main class="workspace">
+        <section class="panel canvas-panel">
+          <div class="canvas-header">
+            <div>
+              <p class="eyebrow">Image Workspace</p>
+              <h2 id="workspaceTitle">No image loaded</h2>
+            </div>
+            <div class="canvas-tools">
+              <div class="tool-row">
+                <button id="tagModeButton" class="tool-button active">Tag Mode</button>
+                <button id="panModeButton" class="tool-button secondary">Pan Mode</button>
+              </div>
+              <div class="tool-row">
+                <button id="zoomOutButton" class="tool-button secondary">-</button>
+                <span id="zoomValue" class="zoom-value">100%</span>
+                <button id="zoomInButton" class="tool-button secondary">+</button>
+                <button id="resetViewButton" class="tool-button secondary">Reset View</button>
+              </div>
+              <p class="muted status" id="statusText">
+                Upload an image or load the demo image to begin.
+              </p>
+            </div>
+          </div>
+
+          <div id="imageStage" class="image-stage empty">
+            <div id="zoomSurface" class="zoom-surface">
+              <img id="targetImage" alt="Tagging target" />
+              <div id="boxLayer" class="box-layer"></div>
+              <div id="drawLayer" class="draw-layer"></div>
+            </div>
+            <div class="empty-state" id="emptyState">
+              <p>No image selected</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel annotations-panel">
+          <div class="canvas-header">
+            <div>
+              <p class="eyebrow">Annotations</p>
+              <h2>Current Tags</h2>
+            </div>
+          </div>
+
+          <div id="annotationList" class="annotation-list"></div>
+
+          <div class="export-block">
+            <button id="exportJson">Export JSON</button>
+            <textarea
+              id="jsonOutput"
+              spellcheck="false"
+              placeholder="Exported annotation JSON will appear here."
+            ></textarea>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
