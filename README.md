@@ -47,12 +47,6 @@ Windows: Download the executable from https://exiftool.org
 
 Automated generation of legal Notices of Violation.
 
-## 👥 Contributors
-
-Amey Mestry: Backend Architecture, GIS Engineering, AI Model Integration.
-
-Zakir: Frontend Tagging Prototype, UI/UX State Management.
-
 
 ## 🔄 System Workflow
 1. **Telemetry Extraction:** `ExifTool` pulls GPS/IMU data from GoPro GPMF streams.
