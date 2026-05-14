@@ -22,7 +22,7 @@ An end-to-end autonomous platform that digitizes municipal property auditing by 
 ## ⚙️ Installation & Setup
 1. **Clone the repo:**
    ```bash
-   git clone [https://github.com/yourusername/housing-violation-engine.git](https://github.com/yourusername/housing-violation-engine.git)
+   git clone [https://github.com/AmeyMestry2801/housing-violation-engine.git](https://github.com/AmeyMestry2801/housing-violation-engine.git)
    ```
 
 2. **Install dependencies**
